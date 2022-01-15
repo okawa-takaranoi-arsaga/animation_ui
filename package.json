@@ -11,6 +11,7 @@
     "fix:style": "stylelint **/*.{css,scss,sass,vue} --fix"
   },
   "dependencies": {
+    "@nuxtjs/composition-api": "^0.31.0",
     "core-js": "^3.15.1",
     "gsap": "^3.9.1",
     "node-sass": "^4.14.1",
