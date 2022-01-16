@@ -10,6 +10,7 @@ module.exports = {
   // add your custom config here
   // https://stylelint.io/user-guide/configuration
   rules: {
+    'declaration-block-no-duplicate-properties': true,
     'order/properties-order': [
       {
         // Must be first.
