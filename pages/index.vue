@@ -1,5 +1,3 @@
 <template>
-  <AccordionMenu />
+  <nuxt-link to="accordion">アコーディオンメニュー</nuxt-link>
 </template>
-
-<script></script>
