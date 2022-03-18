@@ -1,7 +1,7 @@
 <template>
   <div class="accordion-menu">
     <div ref="toggleButton" class="toggle" @click="toggleMenu">
-      <p>開閉ボタン</p>
+      <h3>開閉ボタン</h3>
       <svg
         ref="arrowIcon"
         class="icon"
@@ -36,62 +36,23 @@
 
 <script lang="ts">
 import { ref, defineComponent } from '@nuxtjs/composition-api'
-import gsap from 'gsap'
 
 export default defineComponent({
   setup() {
     const menuContents = ref<HTMLDivElement | null>(null)
     const toggleButton = ref<HTMLDivElement | null>(null)
     const arrowIcon = ref<SVGElement | null>(null)
-    const scrollSpeed = 0.5
-    const toggleMenu = () => {
-      console.log('menucontent')
-      console.log(menuContents.value, arrowIcon.value)
 
+    const toggleMenu = () => {
       if (menuContents.value && arrowIcon.value && toggleButton.value) {
-        const isOpen = menuContents.value.classList.contains('-open')
+
+        const isOpen = toggleButton.value.classList.contains('-open')
         if (isOpen) {
           // 閉じる
-          menuContents.value.classList.remove('-open')
-          // コンテンツ
-          gsap.to(menuContents.value, {
-            height: 0,
-            duration: scrollSpeed,
-            ease: 'power2.inOut',
-          })
-          // ボタンのアニメーション
-          gsap.to(toggleButton.value, {
-            backgroundColor: 'rgba(255, 246, 127, 0.8)',
-            duration: scrollSpeed,
-            ease: 'power2.inOut',
-          })
-          // 矢印アイコン
-          gsap.to(arrowIcon.value, {
-            rotate: '0deg',
-            duration: scrollSpeed,
-            ease: 'power2.inOut',
-          })
+          toggleButton.value.classList.remove('-open')
         } else {
           // 開く
-          menuContents.value.classList.add('-open')
-          // コンテンツ
-          gsap.to(menuContents.value, {
-            height: 'auto',
-            duration: scrollSpeed,
-            ease: 'power2.inOut',
-          })
-          // ボタンのアニメーション
-          gsap.to(toggleButton.value, {
-            backgroundColor: 'rgba(255, 246, 127, 1)',
-            duration: scrollSpeed,
-            ease: 'power2.inOut',
-          })
-          // 矢印アイコン
-          gsap.to(arrowIcon.value, {
-            rotate: '-180deg',
-            duration: scrollSpeed,
-            ease: 'power2.inOut',
-          })
+          toggleButton.value.classList.add('-open')
         }
       }
     }
@@ -109,24 +70,38 @@ export default defineComponent({
 .accordion-menu {
   font-family: 'M PLUS 1p', sans-serif;
   border-radius: 10px;
+
+  > .contents {
+    max-height: 0;
+    padding: 0 10px;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 2;
+    background-color: rgb(238, 238, 235);
+    transition: max-height 0.6s ease-in;
+  }
+
+  > .toggle > .icon {
+    transition: transform 0.6s ease-in;
+    transform: rotateZ(0deg);
+  }
+
+  > .toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    cursor: pointer;
+    background-color: rgb(195, 195, 195);
+
+    &.-open > .icon {
+      transform: rotateZ(-180deg);
+    }
+
+    &.-open ~ .contents {
+      max-height: 100vh;
+    }
+  }
 }
 
-.accordion-menu > .toggle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  cursor: pointer;
-  background-color: rgba(255, 246, 127, 0.8);
-}
-
-.accordion-menu > .contents {
-  height: 0;
-  padding: 0 10px;
-  overflow: hidden;
-  font-size: 14px;
-  line-height: 2;
-  background-color: rgba(255, 246, 127, 1);
-  transform-origin: bottom;
-}
 </style>

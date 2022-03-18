@@ -30,13 +30,14 @@ export default {
       },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@100;300;400;500&display=swap',
+        href:
+          'https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@100;300;400;500&display=swap',
       },
     ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  // css: [{ src: '~/assets/style/app.scss', lang: 'scss' }],
+  css: [{ src: '~/assets/style/app.scss', lang: 'scss' }],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
